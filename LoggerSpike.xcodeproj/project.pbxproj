@@ -1,0 +1,614 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 56;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		4C5DAFE62C7526A60015DCF8 /* LoggerSpikeApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C5DAFE52C7526A60015DCF8 /* LoggerSpikeApp.swift */; };
+		4C5DAFE82C7526A60015DCF8 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C5DAFE72C7526A60015DCF8 /* ContentView.swift */; };
+		4C5DAFEA2C7526A80015DCF8 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4C5DAFE92C7526A80015DCF8 /* Assets.xcassets */; };
+		4C5DAFED2C7526A80015DCF8 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4C5DAFEC2C7526A80015DCF8 /* Preview Assets.xcassets */; };
+		4C5DAFEF2C7526A80015DCF8 /* Persistence.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C5DAFEE2C7526A80015DCF8 /* Persistence.swift */; };
+		4C5DAFF22C7526A80015DCF8 /* LoggerSpike.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 4C5DAFF02C7526A80015DCF8 /* LoggerSpike.xcdatamodeld */; };
+		4C5DAFFC2C7526A80015DCF8 /* LoggerSpikeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C5DAFFB2C7526A80015DCF8 /* LoggerSpikeTests.swift */; };
+		4C5DB0062C7526A80015DCF8 /* LoggerSpikeUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C5DB0052C7526A80015DCF8 /* LoggerSpikeUITests.swift */; };
+		4C5DB0082C7526A80015DCF8 /* LoggerSpikeUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C5DB0072C7526A80015DCF8 /* LoggerSpikeUITestsLaunchTests.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		4C5DAFF82C7526A80015DCF8 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 4C5DAFDA2C7526A60015DCF8 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 4C5DAFE12C7526A60015DCF8;
+			remoteInfo = LoggerSpike;
+		};
+		4C5DB0022C7526A80015DCF8 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 4C5DAFDA2C7526A60015DCF8 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 4C5DAFE12C7526A60015DCF8;
+			remoteInfo = LoggerSpike;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		4C5DAFE22C7526A60015DCF8 /* LoggerSpike.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = LoggerSpike.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		4C5DAFE52C7526A60015DCF8 /* LoggerSpikeApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoggerSpikeApp.swift; sourceTree = "<group>"; };
+		4C5DAFE72C7526A60015DCF8 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		4C5DAFE92C7526A80015DCF8 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		4C5DAFEC2C7526A80015DCF8 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		4C5DAFEE2C7526A80015DCF8 /* Persistence.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Persistence.swift; sourceTree = "<group>"; };
+		4C5DAFF12C7526A80015DCF8 /* LoggerSpike.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = LoggerSpike.xcdatamodel; sourceTree = "<group>"; };
+		4C5DAFF72C7526A80015DCF8 /* LoggerSpikeTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = LoggerSpikeTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		4C5DAFFB2C7526A80015DCF8 /* LoggerSpikeTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoggerSpikeTests.swift; sourceTree = "<group>"; };
+		4C5DB0012C7526A80015DCF8 /* LoggerSpikeUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = LoggerSpikeUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		4C5DB0052C7526A80015DCF8 /* LoggerSpikeUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoggerSpikeUITests.swift; sourceTree = "<group>"; };
+		4C5DB0072C7526A80015DCF8 /* LoggerSpikeUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoggerSpikeUITestsLaunchTests.swift; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		4C5DAFDF2C7526A60015DCF8 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		4C5DAFF42C7526A80015DCF8 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		4C5DAFFE2C7526A80015DCF8 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		4C5DAFD92C7526A60015DCF8 = {
+			isa = PBXGroup;
+			children = (
+				4C5DAFE42C7526A60015DCF8 /* LoggerSpike */,
+				4C5DAFFA2C7526A80015DCF8 /* LoggerSpikeTests */,
+				4C5DB0042C7526A80015DCF8 /* LoggerSpikeUITests */,
+				4C5DAFE32C7526A60015DCF8 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		4C5DAFE32C7526A60015DCF8 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				4C5DAFE22C7526A60015DCF8 /* LoggerSpike.app */,
+				4C5DAFF72C7526A80015DCF8 /* LoggerSpikeTests.xctest */,
+				4C5DB0012C7526A80015DCF8 /* LoggerSpikeUITests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		4C5DAFE42C7526A60015DCF8 /* LoggerSpike */ = {
+			isa = PBXGroup;
+			children = (
+				4C5DAFE52C7526A60015DCF8 /* LoggerSpikeApp.swift */,
+				4C5DAFE72C7526A60015DCF8 /* ContentView.swift */,
+				4C5DAFE92C7526A80015DCF8 /* Assets.xcassets */,
+				4C5DAFEE2C7526A80015DCF8 /* Persistence.swift */,
+				4C5DAFF02C7526A80015DCF8 /* LoggerSpike.xcdatamodeld */,
+				4C5DAFEB2C7526A80015DCF8 /* Preview Content */,
+			);
+			path = LoggerSpike;
+			sourceTree = "<group>";
+		};
+		4C5DAFEB2C7526A80015DCF8 /* Preview Content */ = {
+			isa = PBXGroup;
+			children = (
+				4C5DAFEC2C7526A80015DCF8 /* Preview Assets.xcassets */,
+			);
+			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		4C5DAFFA2C7526A80015DCF8 /* LoggerSpikeTests */ = {
+			isa = PBXGroup;
+			children = (
+				4C5DAFFB2C7526A80015DCF8 /* LoggerSpikeTests.swift */,
+			);
+			path = LoggerSpikeTests;
+			sourceTree = "<group>";
+		};
+		4C5DB0042C7526A80015DCF8 /* LoggerSpikeUITests */ = {
+			isa = PBXGroup;
+			children = (
+				4C5DB0052C7526A80015DCF8 /* LoggerSpikeUITests.swift */,
+				4C5DB0072C7526A80015DCF8 /* LoggerSpikeUITestsLaunchTests.swift */,
+			);
+			path = LoggerSpikeUITests;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		4C5DAFE12C7526A60015DCF8 /* LoggerSpike */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 4C5DB00B2C7526A80015DCF8 /* Build configuration list for PBXNativeTarget "LoggerSpike" */;
+			buildPhases = (
+				4C5DAFDE2C7526A60015DCF8 /* Sources */,
+				4C5DAFDF2C7526A60015DCF8 /* Frameworks */,
+				4C5DAFE02C7526A60015DCF8 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = LoggerSpike;
+			productName = LoggerSpike;
+			productReference = 4C5DAFE22C7526A60015DCF8 /* LoggerSpike.app */;
+			productType = "com.apple.product-type.application";
+		};
+		4C5DAFF62C7526A80015DCF8 /* LoggerSpikeTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 4C5DB00E2C7526A80015DCF8 /* Build configuration list for PBXNativeTarget "LoggerSpikeTests" */;
+			buildPhases = (
+				4C5DAFF32C7526A80015DCF8 /* Sources */,
+				4C5DAFF42C7526A80015DCF8 /* Frameworks */,
+				4C5DAFF52C7526A80015DCF8 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				4C5DAFF92C7526A80015DCF8 /* PBXTargetDependency */,
+			);
+			name = LoggerSpikeTests;
+			productName = LoggerSpikeTests;
+			productReference = 4C5DAFF72C7526A80015DCF8 /* LoggerSpikeTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		4C5DB0002C7526A80015DCF8 /* LoggerSpikeUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 4C5DB0112C7526A80015DCF8 /* Build configuration list for PBXNativeTarget "LoggerSpikeUITests" */;
+			buildPhases = (
+				4C5DAFFD2C7526A80015DCF8 /* Sources */,
+				4C5DAFFE2C7526A80015DCF8 /* Frameworks */,
+				4C5DAFFF2C7526A80015DCF8 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				4C5DB0032C7526A80015DCF8 /* PBXTargetDependency */,
+			);
+			name = LoggerSpikeUITests;
+			productName = LoggerSpikeUITests;
+			productReference = 4C5DB0012C7526A80015DCF8 /* LoggerSpikeUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		4C5DAFDA2C7526A60015DCF8 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = 1;
+				LastSwiftUpdateCheck = 1540;
+				LastUpgradeCheck = 1540;
+				TargetAttributes = {
+					4C5DAFE12C7526A60015DCF8 = {
+						CreatedOnToolsVersion = 15.4;
+					};
+					4C5DAFF62C7526A80015DCF8 = {
+						CreatedOnToolsVersion = 15.4;
+						TestTargetID = 4C5DAFE12C7526A60015DCF8;
+					};
+					4C5DB0002C7526A80015DCF8 = {
+						CreatedOnToolsVersion = 15.4;
+						TestTargetID = 4C5DAFE12C7526A60015DCF8;
+					};
+				};
+			};
+			buildConfigurationList = 4C5DAFDD2C7526A60015DCF8 /* Build configuration list for PBXProject "LoggerSpike" */;
+			compatibilityVersion = "Xcode 14.0";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 4C5DAFD92C7526A60015DCF8;
+			productRefGroup = 4C5DAFE32C7526A60015DCF8 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				4C5DAFE12C7526A60015DCF8 /* LoggerSpike */,
+				4C5DAFF62C7526A80015DCF8 /* LoggerSpikeTests */,
+				4C5DB0002C7526A80015DCF8 /* LoggerSpikeUITests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		4C5DAFE02C7526A60015DCF8 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				4C5DAFED2C7526A80015DCF8 /* Preview Assets.xcassets in Resources */,
+				4C5DAFEA2C7526A80015DCF8 /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		4C5DAFF52C7526A80015DCF8 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		4C5DAFFF2C7526A80015DCF8 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		4C5DAFDE2C7526A60015DCF8 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				4C5DAFF22C7526A80015DCF8 /* LoggerSpike.xcdatamodeld in Sources */,
+				4C5DAFEF2C7526A80015DCF8 /* Persistence.swift in Sources */,
+				4C5DAFE82C7526A60015DCF8 /* ContentView.swift in Sources */,
+				4C5DAFE62C7526A60015DCF8 /* LoggerSpikeApp.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		4C5DAFF32C7526A80015DCF8 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				4C5DAFFC2C7526A80015DCF8 /* LoggerSpikeTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		4C5DAFFD2C7526A80015DCF8 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				4C5DB0062C7526A80015DCF8 /* LoggerSpikeUITests.swift in Sources */,
+				4C5DB0082C7526A80015DCF8 /* LoggerSpikeUITestsLaunchTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		4C5DAFF92C7526A80015DCF8 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 4C5DAFE12C7526A60015DCF8 /* LoggerSpike */;
+			targetProxy = 4C5DAFF82C7526A80015DCF8 /* PBXContainerItemProxy */;
+		};
+		4C5DB0032C7526A80015DCF8 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 4C5DAFE12C7526A60015DCF8 /* LoggerSpike */;
+			targetProxy = 4C5DB0022C7526A80015DCF8 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin XCBuildConfiguration section */
+		4C5DB0092C7526A80015DCF8 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.5;
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG $(inherited)";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		4C5DB00A2C7526A80015DCF8 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.5;
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		4C5DB00C2C7526A80015DCF8 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_ASSET_PATHS = "\"LoggerSpike/Preview Content\"";
+				DEVELOPMENT_TEAM = 9URT9YH7AX;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.congle.TEAMCONG.Alice.LoggerSpike;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		4C5DB00D2C7526A80015DCF8 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_ASSET_PATHS = "\"LoggerSpike/Preview Content\"";
+				DEVELOPMENT_TEAM = 9URT9YH7AX;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.congle.TEAMCONG.Alice.LoggerSpike;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		4C5DB00F2C7526A80015DCF8 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 9URT9YH7AX;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.5;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.congle.TEAMCONG.Alice.LoggerSpikeTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/LoggerSpike.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/LoggerSpike";
+			};
+			name = Debug;
+		};
+		4C5DB0102C7526A80015DCF8 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 9URT9YH7AX;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.5;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.congle.TEAMCONG.Alice.LoggerSpikeTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/LoggerSpike.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/LoggerSpike";
+			};
+			name = Release;
+		};
+		4C5DB0122C7526A80015DCF8 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 9URT9YH7AX;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.congle.TEAMCONG.Alice.LoggerSpikeUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = LoggerSpike;
+			};
+			name = Debug;
+		};
+		4C5DB0132C7526A80015DCF8 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 9URT9YH7AX;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.congle.TEAMCONG.Alice.LoggerSpikeUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = LoggerSpike;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		4C5DAFDD2C7526A60015DCF8 /* Build configuration list for PBXProject "LoggerSpike" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				4C5DB0092C7526A80015DCF8 /* Debug */,
+				4C5DB00A2C7526A80015DCF8 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		4C5DB00B2C7526A80015DCF8 /* Build configuration list for PBXNativeTarget "LoggerSpike" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				4C5DB00C2C7526A80015DCF8 /* Debug */,
+				4C5DB00D2C7526A80015DCF8 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		4C5DB00E2C7526A80015DCF8 /* Build configuration list for PBXNativeTarget "LoggerSpikeTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				4C5DB00F2C7526A80015DCF8 /* Debug */,
+				4C5DB0102C7526A80015DCF8 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		4C5DB0112C7526A80015DCF8 /* Build configuration list for PBXNativeTarget "LoggerSpikeUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				4C5DB0122C7526A80015DCF8 /* Debug */,
+				4C5DB0132C7526A80015DCF8 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		4C5DAFF02C7526A80015DCF8 /* LoggerSpike.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				4C5DAFF12C7526A80015DCF8 /* LoggerSpike.xcdatamodel */,
+			);
+			currentVersion = 4C5DAFF12C7526A80015DCF8 /* LoggerSpike.xcdatamodel */;
+			path = LoggerSpike.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
+	};
+	rootObject = 4C5DAFDA2C7526A60015DCF8 /* Project object */;
+}
