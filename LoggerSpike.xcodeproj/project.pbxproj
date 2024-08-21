@@ -16,6 +16,7 @@
 		4C5DAFFC2C7526A80015DCF8 /* LoggerSpikeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C5DAFFB2C7526A80015DCF8 /* LoggerSpikeTests.swift */; };
 		4C5DB0062C7526A80015DCF8 /* LoggerSpikeUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C5DB0052C7526A80015DCF8 /* LoggerSpikeUITests.swift */; };
 		4C5DB0082C7526A80015DCF8 /* LoggerSpikeUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C5DB0072C7526A80015DCF8 /* LoggerSpikeUITestsLaunchTests.swift */; };
+		4C5DB0152C75CDC60015DCF8 /* Logger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C5DB0142C75CDC60015DCF8 /* Logger.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -48,6 +49,7 @@
 		4C5DB0012C7526A80015DCF8 /* LoggerSpikeUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = LoggerSpikeUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		4C5DB0052C7526A80015DCF8 /* LoggerSpikeUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoggerSpikeUITests.swift; sourceTree = "<group>"; };
 		4C5DB0072C7526A80015DCF8 /* LoggerSpikeUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoggerSpikeUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		4C5DB0142C75CDC60015DCF8 /* Logger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Logger.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -100,6 +102,7 @@
 			children = (
 				4C5DAFE52C7526A60015DCF8 /* LoggerSpikeApp.swift */,
 				4C5DAFE72C7526A60015DCF8 /* ContentView.swift */,
+				4C5DB0142C75CDC60015DCF8 /* Logger.swift */,
 				4C5DAFE92C7526A80015DCF8 /* Assets.xcassets */,
 				4C5DAFEE2C7526A80015DCF8 /* Persistence.swift */,
 				4C5DAFF02C7526A80015DCF8 /* LoggerSpike.xcdatamodeld */,
@@ -263,6 +266,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4C5DB0152C75CDC60015DCF8 /* Logger.swift in Sources */,
 				4C5DAFF22C7526A80015DCF8 /* LoggerSpike.xcdatamodeld in Sources */,
 				4C5DAFEF2C7526A80015DCF8 /* Persistence.swift in Sources */,
 				4C5DAFE82C7526A60015DCF8 /* ContentView.swift in Sources */,
