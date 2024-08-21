@@ -1,86 +1,424 @@
-//
-//  ContentView.swift
-//  LoggerSpike
-//
-//  Created by Cong Le on 20/08/2024.
-//
-
 import SwiftUI
-import CoreData
 
 struct ContentView: View {
-    @Environment(\.managedObjectContext) private var viewContext
+    var body: some View {
+        TabView {
+            PokemonScreen()
+                .tabItem {
+                    Label("Pokémon API", systemImage: "leaf")
+                }
 
-    @FetchRequest(
-        sortDescriptors: [NSSortDescriptor(keyPath: \Item.timestamp, ascending: true)],
-        animation: .default)
-    private var items: FetchedResults<Item>
+            JsonPlaceholderScreen()
+                .tabItem {
+                    Label("JSONPlaceholder", systemImage: "text.bubble")
+                }
+        }
+    }
+}
+
+struct PokemonScreen: View {
+    @State private var pokemon: Pokemon?
+    @State private var errorMessage: String?
+    @State private var isLoading: Bool = false
+    @State private var searchText: String = "pikachu" // Default search text
+
+    private let pokemonService = PokemonService()
 
     var body: some View {
-        NavigationView {
-            List {
-                ForEach(items) { item in
-                    NavigationLink {
-                        Text("Item at \(item.timestamp!, formatter: itemFormatter)")
-                    } label: {
-                        Text(item.timestamp!, formatter: itemFormatter)
+        VStack {
+            HStack {
+                TextField("Enter Pokémon name", text: $searchText)
+                    .textFieldStyle(RoundedBorderTextFieldStyle())
+                    .padding(.horizontal)
+
+                Button(action: {
+                    fetchPokemonData()
+                }) {
+                    Text("Search")
+                        .padding()
+                        .background(Color.green)
+                        .foregroundColor(.white)
+                        .cornerRadius(8)
+                }
+                .disabled(isLoading)
+            }
+
+            if isLoading {
+                ProgressView("Loading...")
+                    .padding()
+            } else if let pokemon = pokemon {
+                VStack(alignment: .leading, spacing: 16) {
+                    if let imageUrl = URL(string: pokemon.sprites.frontDefault) {
+                        AsyncImage(url: imageUrl) { image in
+                            image.resizable()
+                                .aspectRatio(contentMode: .fit)
+                                .frame(width: 150, height: 150)
+                        } placeholder: {
+                            ProgressView()
+                        }
+                    }
+
+                    Text("Name: \(pokemon.name.capitalized)")
+                        .font(.headline)
+                    Text("ID: \(pokemon.id)")
+                    Text("Height: \(pokemon.height)")
+                    Text("Weight: \(pokemon.weight)")
+                    
+                    Text("Types:")
+                    ForEach(pokemon.types, id: \.slot) { typeInfo in
+                        Text(typeInfo.type.name.capitalized)
+                    }
+                    
+                    Text("Abilities:")
+                    ForEach(pokemon.abilities, id: \.slot) { abilityInfo in
+                        Text(abilityInfo.ability.name.capitalized)
                     }
                 }
-                .onDelete(perform: deleteItems)
-            }
-            .toolbar {
-                ToolbarItem(placement: .navigationBarTrailing) {
-                    EditButton()
-                }
-                ToolbarItem {
-                    Button(action: addItem) {
-                        Label("Add Item", systemImage: "plus")
-                    }
-                }
-            }
-            Text("Select an item")
-        }
-    }
-
-    private func addItem() {
-        withAnimation {
-            let newItem = Item(context: viewContext)
-            newItem.timestamp = Date()
-
-            do {
-                try viewContext.save()
-            } catch {
-                // Replace this implementation with code to handle the error appropriately.
-                // fatalError() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
-                let nsError = error as NSError
-                fatalError("Unresolved error \(nsError), \(nsError.userInfo)")
+                .padding()
+            } else if let errorMessage = errorMessage {
+                Text("Error: \(errorMessage)")
+                    .foregroundColor(.red)
+                    .padding()
             }
         }
+        .padding()
     }
 
-    private func deleteItems(offsets: IndexSet) {
-        withAnimation {
-            offsets.map { items[$0] }.forEach(viewContext.delete)
-
-            do {
-                try viewContext.save()
-            } catch {
-                // Replace this implementation with code to handle the error appropriately.
-                // fatalError() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
-                let nsError = error as NSError
-                fatalError("Unresolved error \(nsError), \(nsError.userInfo)")
+    private func fetchPokemonData() {
+        isLoading = true
+        pokemonService.fetchPokemonData(for: searchText.lowercased()) { result in
+            DispatchQueue.main.async {
+                switch result {
+                case .success(let pokemon):
+                    self.pokemon = pokemon
+                    self.errorMessage = nil
+                case .failure(let error):
+                    self.pokemon = nil
+                    self.errorMessage = error.localizedDescription
+                }
+                self.isLoading = false
             }
         }
     }
 }
 
-private let itemFormatter: DateFormatter = {
-    let formatter = DateFormatter()
-    formatter.dateStyle = .short
-    formatter.timeStyle = .medium
-    return formatter
-}()
+struct JsonPlaceholderScreen: View {
+    @State private var responseData: Data?
+    @State private var errorMessage: String?
+    @State private var isLoading: Bool = false
+    @State private var httpMethod: HttpMethod = .post
+    @State private var requestBodyType: RequestBodyType = .defaultBody
+    @State private var contentType: ContentType = .json
+    @State private var authorizationType: AuthorizationType = .bearer
 
-#Preview {
-    ContentView().environment(\.managedObjectContext, PersistenceController.preview.container.viewContext)
+    private let jsonPlaceholderService = JsonPlaceholderService()
+
+    var body: some View {
+        VStack(spacing: 20) {
+            Picker("HTTP Method", selection: $httpMethod) {
+                ForEach(HttpMethod.allCases, id: \.self) {
+                    Text($0.rawValue).tag($0)
+                }
+            }
+            .pickerStyle(SegmentedPickerStyle())
+
+            Picker("Body Type", selection: $requestBodyType) {
+                ForEach(RequestBodyType.allCases, id: \.self) {
+                    Text($0.rawValue).tag($0)
+                }
+            }
+            .pickerStyle(SegmentedPickerStyle())
+            .disabled(httpMethod == .get)
+
+            Picker("Content-Type", selection: $contentType) {
+                ForEach(ContentType.allCases, id: \.self) {
+                    Text($0.rawValue).tag($0)
+                }
+            }
+            .pickerStyle(SegmentedPickerStyle())
+
+            Picker("Authorization", selection: $authorizationType) {
+                ForEach(AuthorizationType.allCases, id: \.self) {
+                    Text($0.rawValue).tag($0)
+                }
+            }
+            .pickerStyle(SegmentedPickerStyle())
+
+            Button(action: {
+                sendRequest()
+            }) {
+                Text("Send \(httpMethod.rawValue) Request")
+                    .padding()
+                    .background(Color.blue)
+                    .foregroundColor(.white)
+                    .cornerRadius(8)
+            }
+            .disabled(isLoading)
+
+            if isLoading {
+                ProgressView("Loading...")
+                    .padding()
+            } else if let data = responseData {
+                Text("Response Data: \(String(data: data, encoding: .utf8) ?? "No Data")")
+                    .padding()
+            } else if let errorMessage = errorMessage {
+                Text("Error: \(errorMessage)")
+                    .foregroundColor(.red)
+                    .padding()
+            }
+        }
+        .padding()
+    }
+
+    private func sendRequest() {
+        isLoading = true
+        jsonPlaceholderService.sendRequest(httpMethod: httpMethod, requestBodyType: requestBodyType, contentType: contentType, authorizationType: authorizationType) { result in
+            DispatchQueue.main.async {
+                switch result {
+                case .success(let data):
+                    self.responseData = data
+                    self.errorMessage = nil
+                case .failure(let error):
+                    self.responseData = nil
+                    self.errorMessage = error.localizedDescription
+                }
+                self.isLoading = false
+            }
+        }
+    }
+}
+
+
+enum HttpMethod: String, CaseIterable {
+    case get = "GET"
+    case post = "POST"
+}
+
+enum RequestBodyType: String, CaseIterable {
+    case defaultBody = "Default Body"
+    case customBody = "Custom Body"
+}
+
+enum ContentType: String, CaseIterable {
+    case json = "application/json"
+    case xml = "application/xml"
+}
+
+enum AuthorizationType: String, CaseIterable {
+    case bearer = "Bearer Token"
+    case basic = "Basic Auth"
+}
+
+// MARK: - Pokémon Models
+struct Pokemon: Codable {
+    let id: Int
+    let name: String
+    let height: Int
+    let weight: Int
+    let types: [PokemonTypeInfo]
+    let abilities: [PokemonAbilityInfo]
+    let sprites: PokemonSprites // Add this line
+}
+
+struct PokemonSprites: Codable {
+    let frontDefault: String
+
+    enum CodingKeys: String, CodingKey {
+        case frontDefault = "front_default"
+    }
+}
+
+struct PokemonTypeInfo: Codable {
+    let slot: Int
+    let type: NamedAPIResource
+}
+
+struct PokemonAbilityInfo: Codable {
+    let slot: Int
+    let ability: NamedAPIResource
+}
+
+struct NamedAPIResource: Codable {
+    let name: String
+    let url: String
+}
+
+// MARK: - Pokémon Service
+class PokemonService {
+    private let session: URLSession
+    
+    init() {
+        let configuration = URLSessionConfiguration.default
+        configuration.protocolClasses = [NetworkLoggingProtocol.self] + (configuration.protocolClasses ?? [])
+        self.session = URLSession(configuration: configuration)
+    }
+    
+    func fetchPokemonData(for name: String, completion: @escaping (Result<Pokemon, Error>) -> Void) {
+        let urlString = "https://pokeapi.co/api/v2/pokemon/\(name)"
+        guard let url = URL(string: urlString) else {
+            completion(.failure(NSError(domain: "Invalid URL", code: 400, userInfo: nil)))
+            return
+        }
+        
+        let request = URLRequest(url: url)
+        
+        let task = session.dataTask(with: request) { data, response, error in
+            if let error = error {
+                completion(.failure(error))
+                return
+            }
+            
+            guard let data = data else {
+                completion(.failure(NSError(domain: "No Data", code: 404, userInfo: nil)))
+                return
+            }
+            
+            do {
+                let pokemon = try JSONDecoder().decode(Pokemon.self, from: data)
+                completion(.success(pokemon))
+            } catch {
+                completion(.failure(error))
+            }
+        }
+        task.resume()
+    }
+}
+
+class JsonPlaceholderService {
+    private let session: URLSession
+
+    init() {
+        let configuration = URLSessionConfiguration.default
+        configuration.protocolClasses = [NetworkLoggingProtocol.self] + (configuration.protocolClasses ?? [])
+        self.session = URLSession(configuration: configuration)
+    }
+
+    func sendRequest(httpMethod: HttpMethod, requestBodyType: RequestBodyType, contentType: ContentType, authorizationType: AuthorizationType, completion: @escaping (Result<Data, Error>) -> Void) {
+        let urlString = "https://jsonplaceholder.typicode.com/posts"
+        guard let url = URL(string: urlString) else {
+            completion(.failure(NSError(domain: "Invalid URL", code: 400, userInfo: nil)))
+            return
+        }
+
+        var request = URLRequest(url: url)
+        request.httpMethod = httpMethod.rawValue
+        request.addValue(contentType.rawValue, forHTTPHeaderField: "Content-Type")
+        
+        switch authorizationType {
+        case .bearer:
+            request.addValue("Bearer abcdef123456", forHTTPHeaderField: "Authorization")
+        case .basic:
+            let credentials = "username:password".data(using: .utf8)?.base64EncodedString() ?? ""
+            request.addValue("Basic \(credentials)", forHTTPHeaderField: "Authorization")
+        }
+
+        if httpMethod == .post {
+            let body: [String: Any] = requestBodyType == .defaultBody ? [
+                "title": "foo",
+                "body": "bar",
+                "userId": 1
+            ] : [
+                "title": "Custom Title",
+                "body": "Custom Body",
+                "userId": 2
+            ]
+            
+            let jsonData = try? JSONSerialization.data(withJSONObject: body)
+            request.httpBody = jsonData
+        }
+
+        let task = session.dataTask(with: request) { data, response, error in
+            if let error = error {
+                completion(.failure(error))
+                return
+            }
+
+            guard let data = data else {
+                completion(.failure(NSError(domain: "No Data", code: 404, userInfo: nil)))
+                return
+            }
+
+            completion(.success(data))
+        }
+        task.resume()
+    }
+}
+
+class NetworkLoggingProtocol: URLProtocol {
+    override class func canInit(with request: URLRequest) -> Bool {
+        return true
+    }
+
+    override class func canonicalRequest(for request: URLRequest) -> URLRequest {
+        return request
+    }
+
+    override func startLoading() {
+        Logger.shared.logRequest(request)
+        
+        let newRequest = (self.request as NSURLRequest).mutableCopy() as! NSMutableURLRequest
+        let task = URLSession.shared.dataTask(with: newRequest as URLRequest) { [weak self] data, response, error in
+            Logger.shared.logResponse(response, data: data, error: error)
+            self?.client?.urlProtocol(self!, didReceive: response!, cacheStoragePolicy: .notAllowed)
+            if let data = data {
+                self?.client?.urlProtocol(self!, didLoad: data)
+            }
+            if let error = error {
+                self?.client?.urlProtocol(self!, didFailWithError: error)
+            }
+            self?.client?.urlProtocolDidFinishLoading(self!)
+        }
+        task.resume()
+    }
+
+    override func stopLoading() {}
+}
+
+class Logger {
+    static let shared = Logger()
+
+    func logRequest(_ request: URLRequest) {
+        print("\n----- [REQUEST START] -----")
+        print("➡️ [REQUEST] \(request.httpMethod ?? "") \(request.url?.absoluteString ?? "")")
+        
+        if let headers = request.allHTTPHeaderFields {
+            print("Headers: \(headers)")
+        }
+        
+        if let body = request.httpBody {
+            if let bodyString = String(data: body, encoding: .utf8) {
+                print("JSON BODY: \(bodyString)")
+            } else {
+                print("Failed to decode body as UTF-8")
+            }
+        } else if let bodyStream = request.httpBodyStream {
+            print("Request body is a stream. Unable to log directly.")
+        } else {
+            print("No body found in the request.")
+        }
+        
+        print("----- [REQUEST END] -----\n")
+    }
+
+    func logResponse(_ response: URLResponse?, data: Data?, error: Error?) {
+        print("\n----- [RESPONSE START] -----")
+        
+        if let httpResponse = response as? HTTPURLResponse {
+            print("⬅️ [RESPONSE] \(httpResponse.statusCode) \(response?.url?.absoluteString ?? "")")
+            
+            if let headers = httpResponse.allHeaderFields as? [String: Any] {
+                print("Headers: \(headers)")
+            }
+            
+            if let data = data, let dataString = String(data: data, encoding: .utf8) {
+                print("Data: \(dataString)")
+            }
+        }
+        
+        if let error = error {
+            print("Error: \(error.localizedDescription)")
+        }
+        
+        print("----- [RESPONSE END] -----\n")
+    }
 }
