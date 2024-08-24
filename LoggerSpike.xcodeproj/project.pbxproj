@@ -21,6 +21,7 @@
 		4C5DB0192C7A0A5A0015DCF8 /* AnalyticsLogScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C5DB0182C7A0A5A0015DCF8 /* AnalyticsLogScreen.swift */; };
 		4C5DB01B2C7A0A8E0015DCF8 /* AnalyticsLogger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C5DB01A2C7A0A8E0015DCF8 /* AnalyticsLogger.swift */; };
 		4C5DB01D2C7A13130015DCF8 /* UserDefaultsEditorScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C5DB01C2C7A13130015DCF8 /* UserDefaultsEditorScreen.swift */; };
+		4C5DB01F2C7A64530015DCF8 /* CrashReporter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C5DB01E2C7A64530015DCF8 /* CrashReporter.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -58,6 +59,7 @@
 		4C5DB0182C7A0A5A0015DCF8 /* AnalyticsLogScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnalyticsLogScreen.swift; sourceTree = "<group>"; };
 		4C5DB01A2C7A0A8E0015DCF8 /* AnalyticsLogger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnalyticsLogger.swift; sourceTree = "<group>"; };
 		4C5DB01C2C7A13130015DCF8 /* UserDefaultsEditorScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultsEditorScreen.swift; sourceTree = "<group>"; };
+		4C5DB01E2C7A64530015DCF8 /* CrashReporter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CrashReporter.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -115,6 +117,7 @@
 				4C5DB0162C79C9780015DCF8 /* NetworkLogScreen.swift */,
 				4C5DB01A2C7A0A8E0015DCF8 /* AnalyticsLogger.swift */,
 				4C5DB0182C7A0A5A0015DCF8 /* AnalyticsLogScreen.swift */,
+				4C5DB01E2C7A64530015DCF8 /* CrashReporter.swift */,
 				4C5DAFE92C7526A80015DCF8 /* Assets.xcassets */,
 				4C5DAFEE2C7526A80015DCF8 /* Persistence.swift */,
 				4C5DAFF02C7526A80015DCF8 /* LoggerSpike.xcdatamodeld */,
@@ -280,6 +283,7 @@
 			files = (
 				4C5DB01B2C7A0A8E0015DCF8 /* AnalyticsLogger.swift in Sources */,
 				4C5DB0152C75CDC60015DCF8 /* NetoworkingLogger.swift in Sources */,
+				4C5DB01F2C7A64530015DCF8 /* CrashReporter.swift in Sources */,
 				4C5DAFF22C7526A80015DCF8 /* LoggerSpike.xcdatamodeld in Sources */,
 				4C5DB0172C79C9780015DCF8 /* NetworkLogScreen.swift in Sources */,
 				4C5DB0192C7A0A5A0015DCF8 /* AnalyticsLogScreen.swift in Sources */,

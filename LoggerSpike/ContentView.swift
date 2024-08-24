@@ -367,10 +367,16 @@ extension View {
     }
 }
 
+
 class DebugToolsViewModel: ObservableObject {
     @Published var showLogs = false
     @Published var showAnalyticsLogs = false
     @Published var showUserdefaultsEditor = false
+    @Published var showCrashReporting = false
+    
+    init() {
+        _ = CrashReporter.shared
+    }
     
     func toggleLogs() {
         showLogs.toggle()
@@ -382,6 +388,10 @@ class DebugToolsViewModel: ObservableObject {
     
     func toggleUserDefaultsEditor() {
         showUserdefaultsEditor.toggle()
+    }
+    
+    func toggleCrashReporting() {
+        showCrashReporting.toggle()
     }
 }
 
@@ -429,6 +439,18 @@ struct OverlayButtonsView: View {
                             .clipShape(Circle())
                             .shadow(radius: 10)
                     }
+                    Button(action: {
+                        withAnimation {
+                            viewModel.toggleCrashReporting()
+                        }
+                    }) {
+                        Image(systemName: "exclamationmark.triangle")
+                            .padding()
+                            .background(Color.red)
+                            .foregroundColor(.white)
+                            .clipShape(Circle())
+                            .shadow(radius: 10)
+                    }
                 }
             }
         }
@@ -457,6 +479,10 @@ struct SheetManager: View {
             }
             .sheet(isPresented: $viewModel.showUserdefaultsEditor) {
                 UserDefaultsEditorView()
+                    .presentationDetents([.medium, .large])
+            }
+            .sheet(isPresented: $viewModel.showCrashReporting) {
+                CrashReportingView()
                     .presentationDetents([.medium, .large])
             }
     }
