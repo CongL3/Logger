@@ -439,18 +439,19 @@ struct OverlayButtonsView: View {
                             .clipShape(Circle())
                             .shadow(radius: 10)
                     }
-                    Button(action: {
-                        withAnimation {
-                            viewModel.toggleCrashReporting()
-                        }
-                    }) {
-                        Image(systemName: "exclamationmark.triangle")
-                            .padding()
-                            .background(Color.red)
-                            .foregroundColor(.white)
-                            .clipShape(Circle())
-                            .shadow(radius: 10)
-                    }
+                    // doesn't work
+//                    Button(action: {
+//                        withAnimation {
+//                            viewModel.toggleCrashReporting()
+//                        }
+//                    }) {
+//                        Image(systemName: "exclamationmark.triangle")
+//                            .padding()
+//                            .background(Color.red)
+//                            .foregroundColor(.white)
+//                            .clipShape(Circle())
+//                            .shadow(radius: 10)
+//                    }
                 }
             }
         }
