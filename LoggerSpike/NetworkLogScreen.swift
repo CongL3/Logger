@@ -16,14 +16,44 @@ struct NetworkLogScreen: View {
                 VStack(alignment: .leading) {
                     Text(log.url)
                         .font(.headline)
-                    Text("Status: \(log.statusCode ?? 0)")
-                        .font(.subheadline)
-                        .foregroundColor(.gray)
+                    let description = StatusCodeInfo.statusShortInfo[log.statusCode ?? 0] ?? ""
+                    StatusCodeBadge(statusCode: log.statusCode ?? 0, description: description)
                 }
                 .padding(.vertical, 8)
             }
         }
         .listStyle(PlainListStyle())
+    }
+}
+
+struct StatusCodeBadge: View {
+    let statusCode: Int
+    let description: String
+
+    var body: some View {
+        Text("\(statusCode) \(description)")
+            .font(.subheadline)
+            .padding(8)
+            .background(borderColor.opacity(0.2))
+            .cornerRadius(8)
+            .overlay(
+                RoundedRectangle(cornerRadius: 8)
+                    .stroke(borderColor, lineWidth: 2)
+            )
+            .foregroundColor(.black)
+    }
+
+    private var borderColor: Color {
+        switch statusCode {
+        case 200..<300:
+            return .green
+        case 400..<500:
+            return .orange
+        case 500..<600:
+            return .red
+        default:
+            return .gray
+        }
     }
 }
 
@@ -38,17 +68,26 @@ struct NetworkLogDetailView: View {
                 Text(log.url)
                     .multilineTextAlignment(.leading)
                     .textSelection(.enabled)
-            }
 
-            Section(header: Text("Status Code")) {
+                Text(log.method)
+                    .multilineTextAlignment(.leading)
+                    .textSelection(.enabled)
+                
+                Text("\(log.responseTime) seconds")
+                    .multilineTextAlignment(.leading)
+                    .textSelection(.enabled)
+
+                Text(formattedTimestamp(log.timestamp))
+                    .multilineTextAlignment(.leading)
+                    .textSelection(.enabled)
+
                 NavigationLink(destination: StatusCodeDetailView(
                     statusCode: log.statusCode ?? 0,
                     statusDescription: StatusCodeInfo.statusCodes[log.statusCode ?? 0] ?? "Unknown Status Code")
                 ) {
-                    Text("\(log.statusCode ?? 0)")
-                        .foregroundColor(.blue)
-                        .multilineTextAlignment(.leading)
-                        .textSelection(.enabled)
+                    
+                    let description = StatusCodeInfo.statusShortInfo[log.statusCode ?? 0] ?? ""
+                    StatusCodeBadge(statusCode: log.statusCode ?? 0, description: description)
                 }
             }
 
@@ -128,6 +167,13 @@ struct NetworkLogDetailView: View {
             return "Formatting Error"
         }
     }
+    
+    private func formattedTimestamp(_ date: Date) -> String {
+        let formatter = DateFormatter()
+        formatter.dateFormat = "HH:mm, MMM dd, yyyy"
+        return formatter.string(from: date)
+    }
+
 }
 
 struct StatusCodeInfo {
@@ -138,8 +184,17 @@ struct StatusCodeInfo {
         401: "Unauthorized: The client must authenticate itself to get the requested response.",
         404: "Not Found: The server can not find the requested resource.",
         500: "Internal Server Error: The server has encountered a situation it doesn't know how to handle.",
-        502: "Bad Gateway: The server was acting as a gateway or proxy and received an invalid response from the upstream server.",
-        999: "Custom Error: This is a custom error status code with a unique explanation."
+        502: "Bad Gateway: The server was acting as a gateway or proxy and received an invalid response from the upstream server."
+    ]
+    
+    static let statusShortInfo: [Int: String] = [
+        200: "OK",
+        201: "Created",
+        400: "Bad Request",
+        401: "Unauthorized",
+        404: "Not Found",
+        500: "Internal Server Error",
+        502: "Bad Gateway"
     ]
 }
 
