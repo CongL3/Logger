@@ -34,16 +34,16 @@ class UserDefaultsManager: ObservableObject {
     }
     
     func loadItems() {
-        
         let defaults = UserDefaults.standard
         let allKeys = defaults.dictionaryRepresentation().keys
         let filteredKeys = allKeys.filter { !systemKeys.contains($0) }
         
-        items = filteredKeys.map { key in
+        let sortedKeys = filteredKeys.sorted()
+        
+        items = sortedKeys.map { key in
             UserDefaultsItem(key: key, value: defaults.object(forKey: key) ?? "nil")
         }
     }
-    
     func updateItem(_ item: UserDefaultsItem) {
         if let index = items.firstIndex(where: { $0.key == item.key }) {
             items[index] = item
@@ -114,6 +114,7 @@ struct UserDefaultsItemDetailView: View {
     @State private var boolValue: Bool?
     @State private var dateValue: Date?
     @State private var arrayValue: [String] = []
+    @State private var editingIndex: Int?
     
     let item: UserDefaultsItem
     let onSave: (UserDefaultsItem) -> Void
@@ -150,8 +151,26 @@ struct UserDefaultsItemDetailView: View {
                     ), displayedComponents: [.date, .hourAndMinute])
                 case is [String]:
                     List {
-                        ForEach(arrayValue, id: \.self) { item in
-                            Text(item)
+                        ForEach(arrayValue.indices, id: \.self) { index in
+                            HStack {
+                                TextField("Item", text: Binding(
+                                    get: { arrayValue[index] },
+                                    set: { arrayValue[index] = $0 }
+                                ))
+                                .textFieldStyle(RoundedBorderTextFieldStyle())
+                                .frame(maxWidth: .infinity)
+                                .onTapGesture {
+                                    editingIndex = index
+                                }
+                                .contextMenu {
+                                    Button(action: {
+                                        removeArrayItems(at: IndexSet(integer: index))
+                                    }) {
+                                        Text("Delete")
+                                        Image(systemName: "trash")
+                                    }
+                                }
+                            }
                         }
                         .onDelete(perform: removeArrayItems)
                     }
