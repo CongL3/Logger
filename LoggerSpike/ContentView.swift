@@ -3,6 +3,7 @@ import SwiftUI
 struct ContentView: View {
     @State private var showLogs = false
     @State private var showAnalyticsLogs = false
+    @State private var showUserdefaultsEditor = false
 
     var body: some View {
         TabView {
@@ -45,6 +46,18 @@ struct ContentView: View {
                                 .clipShape(Circle())
                                 .shadow(radius: 10)
                         }
+                        Button(action: {
+                            withAnimation {
+                                showUserdefaultsEditor.toggle()
+                            }
+                        }) {
+                            Image(systemName: "gear")
+                                .padding()
+                                .background(Color.blue)
+                                .foregroundColor(.white)
+                                .clipShape(Circle())
+                                .shadow(radius: 10)
+                        }
                     }
                 }
             }
@@ -62,6 +75,10 @@ struct ContentView: View {
         }
         .sheet(isPresented: $showAnalyticsLogs) {
             AnalyticsLogScreen()
+                .presentationDetents([.medium, .large])
+        }
+        .sheet(isPresented: $showUserdefaultsEditor) {
+            UserDefaultsEditorView()
                 .presentationDetents([.medium, .large])
         }
     }
