@@ -1,6 +1,8 @@
 import SwiftUI
 
 struct ContentView: View {
+    @State private var showLogs = false
+
     var body: some View {
         TabView {
             PokemonScreen()
@@ -13,6 +15,35 @@ struct ContentView: View {
                     Label("JSONPlaceholder", systemImage: "text.bubble")
                 }
         }
+        .overlay(
+            VStack {
+                Spacer()
+                HStack {
+                    Spacer()
+                    Button(action: {
+                        showLogs.toggle()
+                    }) {
+                        Image(systemName: "ladybug")
+                            .padding()
+                            .background(Color.green)
+                            .foregroundColor(.white)
+                            .clipShape(Circle())
+                            .shadow(radius: 10)
+                    }
+                }
+            }
+            .padding()
+        )
+        .sheet(isPresented: $showLogs) {
+            NavigationView {
+                NetworkLogScreen()
+                    .navigationBarTitle("Network Logs", displayMode: .inline)
+                    .navigationBarItems(leading: Button("Close") {
+                        showLogs = false
+                    })
+            }
+            .presentationDetents([.medium, .large])
+        }
     }
 }
 
@@ -20,7 +51,7 @@ struct PokemonScreen: View {
     @State private var pokemon: Pokemon?
     @State private var errorMessage: String?
     @State private var isLoading: Bool = false
-    @State private var searchText: String = "pikachu" // Default search text
+    @State private var searchText: String = "pikachu"
 
     private let pokemonService = PokemonService()
 
@@ -217,7 +248,7 @@ struct Pokemon: Codable {
     let weight: Int
     let types: [PokemonTypeInfo]
     let abilities: [PokemonAbilityInfo]
-    let sprites: PokemonSprites // Add this line
+    let sprites: PokemonSprites
 }
 
 struct PokemonSprites: Codable {

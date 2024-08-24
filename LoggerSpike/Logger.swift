@@ -21,7 +21,7 @@ class NetworkLoggingProtocol: URLProtocol {
         
         let newRequest = (self.request as NSURLRequest).mutableCopy() as! NSMutableURLRequest
         let task = URLSession.shared.dataTask(with: newRequest as URLRequest) { [weak self] data, response, error in
-            Logger.shared.logResponse(response, data: data, error: error)
+            Logger.shared.logResponse(response, data: data, error: error, request: self?.request)
             self?.client?.urlProtocol(self!, didReceive: response!, cacheStoragePolicy: .notAllowed)
             if let data = data {
                 self?.client?.urlProtocol(self!, didLoad: data)
@@ -40,48 +40,100 @@ class NetworkLoggingProtocol: URLProtocol {
 class Logger {
     static let shared = Logger()
 
+    struct NetworkLog: Identifiable {
+        let id = UUID()
+        let url: String
+        let statusCode: Int?
+        let responseTime: Double
+        let error: String?
+        let timestamp: Date
+        let method: String
+        let requestHeaders: [String: String]?
+        let responseHeaders: [String: String]?
+        let requestBody: String?
+        let responseBody: String?
+    }
+
+    private var logs: [NetworkLog] = []
+    private let maxLogs: Int = 100
+    private var requestStartTime: Date?
+
     func logRequest(_ request: URLRequest) {
         print("\n----- [REQUEST START] -----")
         print("➡️ [REQUEST] \(request.httpMethod ?? "") \(request.url?.absoluteString ?? "")")
         
-        if let headers = request.allHTTPHeaderFields {
-            print("Headers: \(headers)")
-        }
+        requestStartTime = Date()
+
+        let headers = request.allHTTPHeaderFields
+        var bodyString: String? = nil
         
         if let body = request.httpBody {
-            if let bodyString = String(data: body, encoding: .utf8) {
-                print("JSON BODY: \(bodyString)")
-            } else {
-                print("Failed to decode body as UTF-8")
-            }
-        } else if let bodyStream = request.httpBodyStream {
+            bodyString = String(data: body, encoding: .utf8)
+            print("JSON BODY: \(bodyString ?? "Failed to decode body as UTF-8")")
+        } else if request.httpBodyStream != nil {
             print("Request body is a stream. Unable to log directly.")
         } else {
             print("No body found in the request.")
         }
-        
+
         print("----- [REQUEST END] -----\n")
     }
 
-    func logResponse(_ response: URLResponse?, data: Data?, error: Error?) {
+    func logResponse(_ response: URLResponse?, data: Data?, error: Error?, request: URLRequest?) {
         print("\n----- [RESPONSE START] -----")
         
-        if let httpResponse = response as? HTTPURLResponse {
-            print("⬅️ [RESPONSE] \(httpResponse.statusCode) \(response?.url?.absoluteString ?? "")")
-            
-            if let headers = httpResponse.allHeaderFields as? [String: Any] {
-                print("Headers: \(headers)")
-            }
-            
-            if let data = data, let dataString = String(data: data, encoding: .utf8) {
-                print("Data: \(dataString)")
-            }
-        }
+        guard let httpResponse = response as? HTTPURLResponse else { return }
+
+        let url = response?.url?.absoluteString ?? "Unknown URL"
+        let statusCode = httpResponse.statusCode
+        let responseTime = Date().timeIntervalSince(requestStartTime ?? Date())
         
+        print("⬅️ [RESPONSE] \(statusCode) \(url)")
+        
+        let responseHeaders = httpResponse.allHeaderFields as? [String: String]
+        var responseBody: String? = nil
+        if let data = data, let dataString = String(data: data, encoding: .utf8) {
+            print("Data: \(dataString)")
+            responseBody = dataString
+        }
+
         if let error = error {
             print("Error: \(error.localizedDescription)")
         }
         
         print("----- [RESPONSE END] -----\n")
+
+        let method = request?.httpMethod ?? "Unknown Method"
+        let requestHeaders = request?.allHTTPHeaderFields
+        var requestBody: String? = nil
+        if let body = request?.httpBody {
+            requestBody = String(data: body, encoding: .utf8)
+        }
+
+        let log = NetworkLog(
+            url: url,
+            statusCode: statusCode,
+            responseTime: responseTime,
+            error: error?.localizedDescription,
+            timestamp: Date(),
+            method: method,
+            requestHeaders: requestHeaders,
+            responseHeaders: responseHeaders,
+            requestBody: requestBody,
+            responseBody: responseBody
+        )
+
+        addLog(log)
+    }
+
+    private func addLog(_ log: NetworkLog) {
+        if logs.count >= maxLogs {
+            logs.removeFirst()
+        }
+        logs.append(log)
+    }
+
+    func getAllLogs() -> [NetworkLog] {
+        return logs
     }
 }
