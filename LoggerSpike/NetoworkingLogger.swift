@@ -17,11 +17,11 @@ class NetworkLoggingProtocol: URLProtocol {
     }
 
     override func startLoading() {
-        Logger.shared.logRequest(request)
+        NetoworkingLogger.shared.logRequest(request)
         
         let newRequest = (self.request as NSURLRequest).mutableCopy() as! NSMutableURLRequest
         let task = URLSession.shared.dataTask(with: newRequest as URLRequest) { [weak self] data, response, error in
-            Logger.shared.logResponse(response, data: data, error: error, request: self?.request)
+            NetoworkingLogger.shared.logResponse(response, data: data, error: error, request: self?.request)
             self?.client?.urlProtocol(self!, didReceive: response!, cacheStoragePolicy: .notAllowed)
             if let data = data {
                 self?.client?.urlProtocol(self!, didLoad: data)
@@ -37,8 +37,8 @@ class NetworkLoggingProtocol: URLProtocol {
     override func stopLoading() {}
 }
 
-class Logger {
-    static let shared = Logger()
+class NetoworkingLogger {
+    static let shared = NetoworkingLogger()
 
     struct NetworkLog: Identifiable {
         let id = UUID()

@@ -2,6 +2,7 @@ import SwiftUI
 
 struct ContentView: View {
     @State private var showLogs = false
+    @State private var showAnalyticsLogs = false
 
     var body: some View {
         TabView {
@@ -20,15 +21,30 @@ struct ContentView: View {
                 Spacer()
                 HStack {
                     Spacer()
-                    Button(action: {
-                        showLogs.toggle()
-                    }) {
-                        Image(systemName: "ladybug")
-                            .padding()
-                            .background(Color.green)
-                            .foregroundColor(.white)
-                            .clipShape(Circle())
-                            .shadow(radius: 10)
+                    VStack {
+                        Spacer()
+                        Button(action: {
+                            showLogs.toggle()
+                        }) {
+                            Image(systemName: "ladybug")
+                                .padding()
+                                .background(Color.green)
+                                .foregroundColor(.white)
+                                .clipShape(Circle())
+                                .shadow(radius: 10)
+                        }
+                        Button(action: {
+                            withAnimation {
+                                showAnalyticsLogs.toggle()
+                            }
+                        }) {
+                            Image(systemName: "chart.bar")
+                                .padding()
+                                .background(Color.blue)
+                                .foregroundColor(.white)
+                                .clipShape(Circle())
+                                .shadow(radius: 10)
+                        }
                     }
                 }
             }
@@ -43,6 +59,10 @@ struct ContentView: View {
                     })
             }
             .presentationDetents([.medium, .large])
+        }
+        .sheet(isPresented: $showAnalyticsLogs) {
+            AnalyticsLogScreen()
+                .presentationDetents([.medium, .large])
         }
     }
 }
@@ -64,6 +84,7 @@ struct PokemonScreen: View {
 
                 Button(action: {
                     fetchPokemonData()
+                    AnalyticsService.logEvent("Search button pressed")
                 }) {
                     Text("Search")
                         .padding()

@@ -8,11 +8,11 @@
 import SwiftUI
 
 struct NetworkLogScreen: View {
-    @State private var selectedLog: Logger.NetworkLog?
+    @State private var selectedLog: NetoworkingLogger.NetworkLog?
 
     var body: some View {
-        List(Logger.shared.getAllLogs()) { log in
-            NavigationLink(destination: NetworkLogDetailView(log: log)) {
+        List(NetoworkingLogger.shared.getAllLogs()) { log in
+            NavigationLink(destination: NetworkLogDetailScreen(log: log)) {
                 VStack(alignment: .leading) {
                     Text(log.url)
                         .font(.headline)
@@ -57,8 +57,8 @@ struct StatusCodeBadge: View {
     }
 }
 
-struct NetworkLogDetailView: View {
-    let log: Logger.NetworkLog
+struct NetworkLogDetailScreen: View {
+    let log: NetoworkingLogger.NetworkLog
     @State private var showFullRequestBody = false
     @State private var showFullResponseBody = false
 
