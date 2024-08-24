@@ -41,9 +41,15 @@ struct NetworkLogDetailView: View {
             }
 
             Section(header: Text("Status Code")) {
-                Text("\(log.statusCode ?? 0)")
-                    .multilineTextAlignment(.leading)
-                    .textSelection(.enabled)
+                NavigationLink(destination: StatusCodeDetailView(
+                    statusCode: log.statusCode ?? 0,
+                    statusDescription: StatusCodeInfo.statusCodes[log.statusCode ?? 0] ?? "Unknown Status Code")
+                ) {
+                    Text("\(log.statusCode ?? 0)")
+                        .foregroundColor(.blue)
+                        .multilineTextAlignment(.leading)
+                        .textSelection(.enabled)
+                }
             }
 
             Section(header: Text("Request Headers")) {
@@ -121,5 +127,39 @@ struct NetworkLogDetailView: View {
         } catch {
             return "Formatting Error"
         }
+    }
+}
+
+struct StatusCodeInfo {
+    static let statusCodes: [Int: String] = [
+        200: "OK: The request has succeeded.",
+        201: "Created: The request has been fulfilled and resulted in a new resource being created.",
+        400: "Bad Request: The server could not understand the request due to invalid syntax.",
+        401: "Unauthorized: The client must authenticate itself to get the requested response.",
+        404: "Not Found: The server can not find the requested resource.",
+        500: "Internal Server Error: The server has encountered a situation it doesn't know how to handle.",
+        502: "Bad Gateway: The server was acting as a gateway or proxy and received an invalid response from the upstream server.",
+        999: "Custom Error: This is a custom error status code with a unique explanation."
+    ]
+}
+
+struct StatusCodeDetailView: View {
+    let statusCode: Int
+    let statusDescription: String
+
+    var body: some View {
+        VStack(alignment: .leading, spacing: 16) {
+            Text("Status Code: \(statusCode)")
+                .font(.title)
+                .bold()
+
+            Text(statusDescription)
+                .font(.body)
+
+            Spacer()
+        }
+        .padding()
+        .navigationTitle("Status Code Details")
+        .navigationBarTitleDisplayMode(.inline)
     }
 }
